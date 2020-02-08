@@ -2,20 +2,21 @@ package DrawingFiguresWithLoops;
 
 public class MM {
 
-    private int n;
+    private int size;
 
-    public MM(int n) throws NumberNotOddException, NumberNotPositiveException {
-        this.setTimes(n);
+    public MM(int size) throws NumberNotOddException, NumberNotPositiveException {
+        this.setSize(size);
     }
 
-    public void setTimes(int n) throws NumberNotOddException, NumberNotPositiveException {
-        if (n < 2){
+    public void setSize(int number) throws NumberNotOddException, NumberNotPositiveException {
+        if (number < 2){
             throw new NumberNotPositiveException("Number cannot be negative or 1");
         }
-        if (n % 2 == 0){
+        if (number % 2 == 0){
             throw new NumberNotOddException("Number must be odd!");
         }
-        this.n = n;
+
+        this.size = number;
     }
 
     public void printMM(){
@@ -24,21 +25,21 @@ public class MM {
     }
 
     private void printLowerPart() {
-        for (int i = 0; i < n / 2 + 1; i++) {
-            System.out.println(String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s", repeatStr("-", n / 2 - i), repeatStr("*", n),
-                    repeatStr("-", i + i + 1), repeatStr("*", n * 2 - 1 - i - i), repeatStr("-", i + i + 1),
-                    repeatStr("*", n), repeatStr("-", n - i - i - 1), repeatStr("*", n),
-                    repeatStr("-", i + i + 1), repeatStr("*", n * 2 - 1 - i - i), repeatStr("-", i + i + 1),
-                    repeatStr("*", n ), repeatStr("-", n / 2 - i)));
+        for (int i = 0; i < size / 2 + 1; i++) {
+            System.out.println(String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s", repeatStr("-", size / 2 - i), repeatStr("*", size),
+                    repeatStr("-", i + i + 1), repeatStr("*", size * 2 - 1 - i - i), repeatStr("-", i + i + 1),
+                    repeatStr("*", size), repeatStr("-", size - i - i - 1), repeatStr("*", size),
+                    repeatStr("-", i + i + 1), repeatStr("*", size * 2 - 1 - i - i), repeatStr("-", i + i + 1),
+                    repeatStr("*", size), repeatStr("-", size / 2 - i)));
         }
     }
 
     private void printUpperPart() {
-        for (int i = 0; i < n / 2 + 1; i++) {
-            System.out.println(String.format("%s%s%s%s%s%s%s%s%s", repeatStr("-", n - i), repeatStr("*", n + i + i),
-                    repeatStr("-", n - i - i), repeatStr("*", n + i + i), repeatStr("-", n * 2 - i - i),
-                    repeatStr("*", n + i + i), repeatStr("-", n - i - i), repeatStr("*", n + i + i),
-                    repeatStr("-", n - i)));
+        for (int i = 0; i < size / 2 + 1; i++) {
+            System.out.println(String.format("%s%s%s%s%s%s%s%s%s", repeatStr("-", size - i), repeatStr("*", size + i + i),
+                    repeatStr("-", size - i - i), repeatStr("*", size + i + i), repeatStr("-", size * 2 - i - i),
+                    repeatStr("*", size + i + i), repeatStr("-", size - i - i), repeatStr("*", size + i + i),
+                    repeatStr("-", size - i)));
         }
     }
 
