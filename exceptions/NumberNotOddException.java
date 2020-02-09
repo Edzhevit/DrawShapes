@@ -1,4 +1,4 @@
-package DrawingFiguresWithLoops;
+package DrawShapes.exceptions;
 
 public class NumberNotOddException extends Throwable{
 

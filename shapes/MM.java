@@ -1,21 +1,27 @@
-package DrawingFiguresWithLoops;
+package DrawShapes.shapes;
+
+import DrawShapes.exceptions.NumberNotOddException;
+import DrawShapes.exceptions.NumberNotPositiveException;
+import DrawShapes.exceptions.NumberTooBigException;
 
 public class MM {
 
     private int size;
 
-    public MM(int size) throws NumberNotOddException, NumberNotPositiveException {
+    public MM(int size) throws NumberNotOddException, NumberNotPositiveException, NumberTooBigException {
         this.setSize(size);
     }
 
-    public void setSize(int number) throws NumberNotOddException, NumberNotPositiveException {
+    public void setSize(int number) throws NumberNotOddException, NumberNotPositiveException, NumberTooBigException {
         if (number < 2){
             throw new NumberNotPositiveException("Number cannot be negative or 1");
+        }
+        if (number > 10000){
+            throw new NumberTooBigException("Number must be less than 10000!");
         }
         if (number % 2 == 0){
             throw new NumberNotOddException("Number must be odd!");
         }
-
         this.size = number;
     }
 
