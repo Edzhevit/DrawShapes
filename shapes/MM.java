@@ -3,57 +3,37 @@ package DrawShapes.shapes;
 import DrawShapes.exceptions.NumberNotOddException;
 import DrawShapes.exceptions.NumberNotPositiveException;
 import DrawShapes.exceptions.NumberTooBigException;
+import DrawShapes.shapes.base.Drawable;
+import DrawShapes.shapes.base.Shape;
 
-public class MM {
+public class MM extends Shape implements Drawable {
 
-    private int size;
-
-    public MM(int size) throws NumberNotOddException, NumberNotPositiveException, NumberTooBigException {
-        this.setSize(size);
+    public MM(int size) throws NumberTooBigException, NumberNotPositiveException, NumberNotOddException {
+        super(size);
     }
 
-    public void setSize(int number) throws NumberNotOddException, NumberNotPositiveException, NumberTooBigException {
-        if (number < 2){
-            throw new NumberNotPositiveException("Number cannot be negative or 1");
-        }
-        if (number > 10000){
-            throw new NumberTooBigException("Number must be less than 10000!");
-        }
-        if (number % 2 == 0){
-            throw new NumberNotOddException("Number must be odd!");
-        }
-        this.size = number;
-    }
-
-    public void printMM(){
+    @Override
+    public void drawShape(){
         printUpperPart();
         printLowerPart();
     }
 
-    private void printLowerPart() {
-        for (int i = 0; i < size / 2 + 1; i++) {
-            System.out.println(String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s", repeatStr("-", size / 2 - i), repeatStr("*", size),
-                    repeatStr("-", i + i + 1), repeatStr("*", size * 2 - 1 - i - i), repeatStr("-", i + i + 1),
-                    repeatStr("*", size), repeatStr("-", size - i - i - 1), repeatStr("*", size),
-                    repeatStr("-", i + i + 1), repeatStr("*", size * 2 - 1 - i - i), repeatStr("-", i + i + 1),
-                    repeatStr("*", size), repeatStr("-", size / 2 - i)));
-        }
-    }
-
     private void printUpperPart() {
-        for (int i = 0; i < size / 2 + 1; i++) {
-            System.out.println(String.format("%s%s%s%s%s%s%s%s%s", repeatStr("-", size - i), repeatStr("*", size + i + i),
-                    repeatStr("-", size - i - i), repeatStr("*", size + i + i), repeatStr("-", size * 2 - i - i),
-                    repeatStr("*", size + i + i), repeatStr("-", size - i - i), repeatStr("*", size + i + i),
-                    repeatStr("-", size - i)));
+        for (int i = 0; i < getSize() / 2 + 1; i++) {
+            System.out.println(String.format("%s%s%s%s%s%s%s%s%s", repeatString("-", getSize() - i), repeatString("*", getSize() + i + i),
+                    repeatString("-", getSize() - i - i), repeatString("*", getSize() + i + i), repeatString("-", getSize() * 2 - i - i),
+                    repeatString("*", getSize() + i + i), repeatString("-", getSize() - i - i), repeatString("*", getSize() + i + i),
+                    repeatString("-", getSize() - i)));
         }
     }
 
-    private String repeatStr(String strToRepeat, int times) {
-        StringBuilder text = new StringBuilder();
-        for (int i = 0; i < times; i++) {
-            text.append(strToRepeat);
+    private void printLowerPart() {
+        for (int i = 0; i < getSize() / 2 + 1; i++) {
+            System.out.println(String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s", repeatString("-", getSize() / 2 - i), repeatString("*", getSize()),
+                    repeatString("-", i + i + 1), repeatString("*", getSize() * 2 - 1 - i - i), repeatString("-", i + i + 1),
+                    repeatString("*", getSize()), repeatString("-", getSize() - i - i - 1), repeatString("*", getSize()),
+                    repeatString("-", i + i + 1), repeatString("*", getSize() * 2 - 1 - i - i), repeatString("-", i + i + 1),
+                    repeatString("*", getSize()), repeatString("-", getSize() / 2 - i)));
         }
-        return text.toString();
     }
 }

@@ -3,76 +3,48 @@ package DrawShapes.shapes;
 import DrawShapes.exceptions.NumberNotOddException;
 import DrawShapes.exceptions.NumberNotPositiveException;
 import DrawShapes.exceptions.NumberTooBigException;
+import DrawShapes.shapes.base.Drawable;
+import DrawShapes.shapes.base.Shape;
 
-public class EiffelTower {
-
-    private int size;
+public class EiffelTower extends Shape implements Drawable {
 
     public EiffelTower(int size) throws NumberTooBigException, NumberNotPositiveException, NumberNotOddException {
-        this.setSize(size);
+        super(size);
     }
 
-    public int getSize() {
-        return size;
+    @Override
+    public void drawShape() {
+        printUpperPart();
+        printLowerPart();
     }
 
-    public void setSize(int number) throws NumberNotOddException, NumberNotPositiveException, NumberTooBigException {
-        if (number < 2){
-            throw new NumberNotPositiveException("Number cannot be negative or 1");
+    private void printUpperPart() {
+        for (int i = 0; i < getSize(); i++) {
+            System.out.println(String.format("%s**%s", repeatString("-", getSize() + 2),
+                    repeatString("-", getSize() + 2)));
         }
-        if (number > 10000){
-            throw new NumberTooBigException("Number must be less than 10000!");
+        for (int i = 0; i < getSize() - 3; i++) {
+            System.out.println(String.format("%s****%s", repeatString("-", getSize() + 1),
+                    repeatString("-", getSize() + 1)));
         }
-        if (number % 2 == 0){
-            throw new NumberNotOddException("Number must be odd!");
+        System.out.println(String.format("%s%s%s", repeatString("-", getSize()), repeatString("*", 6),
+                repeatString("-", getSize())));
+        for (int i = 0; i < getSize() - 4; i++) {
+            System.out.println(String.format("%s**--**%s", repeatString("-", getSize()), repeatString("-", getSize())));
         }
-        this.size = number;
     }
 
-    public void printEiffelTower(){
-        for (int i = 0; i < size; i++) {
-            System.out.println(String.format("%s**%s", repeatString("-", size + 2),
-                    repeatString("-", size+2)));
-
+    private void printLowerPart() {
+        for (int i = 0; i < getSize() - 3; i++) {
+            System.out.println(String.format("%s**----**%s", repeatString("-", getSize() - 1), repeatString("-", getSize() - 1)));
         }
-
-        for (int i = 0; i < size - 3; i++) {
-            System.out.println(String.format("%s****%s", repeatString("-", size + 1),
-                    repeatString("-", size + 1)));
-
+        System.out.println(String.format("%s%s%s", repeatString("-", getSize() - 2), repeatString("*", 10),
+                repeatString("-", getSize() - 2)));
+        for (int i = 0; i < getSize() - 3; i++) {
+            System.out.println(String.format("%s**%s**%s", repeatString("-", getSize() - 3 - i), repeatString("-", 8 + 2 * i),
+                    repeatString("-", getSize() - 3 - i)));
         }
-        System.out.println(String.format("%s%s%s",repeatString("-", size),repeatString("*", 6),
-                repeatString("-", size)));
-
-        for (int i = 0; i < size - 4; i++) {
-            System.out.println(String.format("%s**--**%s",repeatString("-", size),repeatString("-", size)));
-
-        }
-
-        for (int i = 0; i < size - 3; i++) {
-            System.out.println(String.format("%s**----**%s", repeatString("-", size-1),repeatString("-", size-1)));
-
-        }
-
-        System.out.println(String.format("%s%s%s", repeatString("-", size-2), repeatString("*", 10),
-                repeatString("-", size-2)));
-
-        for (int i = 0; i < size-3; i++) {
-            System.out.println(String.format("%s**%s**%s", repeatString("-", size - 3 - i),repeatString("-", 8 + 2 * i),
-                    repeatString("-", size -3 -i)));
-
-        }
-
-        System.out.println(String.format("***%s***", repeatString("-", size*2)));
+        System.out.println(String.format("***%s***", repeatString("-", getSize() * 2)));
     }
 
-
-    public static String repeatString(String text, int count){
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < count; i++) {
-            result.append(text);
-
-        }
-        return result.toString();
-    }
 }

@@ -3,10 +3,8 @@ package DrawShapes;
 import DrawShapes.exceptions.NumberNotOddException;
 import DrawShapes.exceptions.NumberNotPositiveException;
 import DrawShapes.exceptions.NumberTooBigException;
-import DrawShapes.shapes.EiffelTower;
-import DrawShapes.shapes.MM;
-import DrawShapes.shapes.SublimeLogo;
-import DrawShapes.shapes.Sunglasses;
+import DrawShapes.shapes.*;
+import DrawShapes.shapes.base.Shape;
 
 import java.util.Scanner;
 
@@ -15,34 +13,35 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to DrawShapes Game! Choose a shape to draw.");
         System.out.println("Type MM, Eiffel, Sublime or Sunglasses please...");
-        String shape = scanner.nextLine().toLowerCase();
+        String input = scanner.nextLine().toLowerCase();
         int size;
 
-        while (!shape.equalsIgnoreCase("Exit")) {
+        while (!input.equalsIgnoreCase("Exit")) {
             System.out.println("Please enter an odd number between 2 and 10000...");
             size = Integer.parseInt(scanner.nextLine());
+            Shape shape;
             try {
-                switch (shape) {
+                switch (input) {
                     case "mm":
-                        MM mm = new MM(size);
-                        mm.printMM();
+                        shape = new MM(size);
+                        shape.drawShape();
                         break;
                     case "eiffel":
-                        EiffelTower eiffelTower = new EiffelTower(size);
-                        eiffelTower.printEiffelTower();
+                        shape = new EiffelTower(size);
+                        shape.drawShape();
                         break;
                     case "sublime":
-                        SublimeLogo sublime = new SublimeLogo(size);
-                        sublime.printSublimeLogo();
+                        shape = new SublimeLogo(size);
+                        shape.drawShape();
                         break;
                     case "sunglasses":
-                        Sunglasses sunglasses = new Sunglasses(size);
-                        sunglasses.printSunglasses();
+                        shape = new Sunglasses(size);
+                        shape.drawShape();
                         break;
                 }
                 System.out.println("Try Again!");
                 System.out.println("Type MM, Eiffel, Sublime, Sunglasses or type Exit to quit the game...");
-                shape = scanner.nextLine();
+                input = scanner.nextLine();
             } catch (NumberNotOddException | NumberTooBigException | NumberNotPositiveException ex) {
                 System.out.println(ex.getMessage());
             }
